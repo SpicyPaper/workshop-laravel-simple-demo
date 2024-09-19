@@ -13,7 +13,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all(); // Récupérer tous les livres
-        return view('books', ['books' => $books]); // Passer les livres à la vue 'books'
+        return view('books/index', ['books' => $books]); // Passer les livres à la vue 'books'
     }
 
     /**
@@ -21,7 +21,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -29,7 +29,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'pages' => 'required|integer',
+            'quantity' => 'required|integer',
+        ]);
+    
+        Book::create($request->all());
+    
+        return redirect()->route('books.index')->with('success', 'Book added successfully!');
     }
 
     /**
@@ -37,7 +45,8 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $book = Book::findOrFail($id); 
+        return view('books.show', ['book' => $book]);
     }
 
     /**
@@ -45,7 +54,8 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -53,7 +63,16 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'pages' => 'required|integer',
+            'quantity' => 'required|integer',
+        ]);
+    
+        $book = Book::findOrFail($id); 
+        $book->update($request->all());
+    
+        return redirect()->route('books.index')->with('success', 'Book updated successfully!');
     }
 
     /**
@@ -61,6 +80,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::findOrFail($id); // Trouver le livre par ID
+        $book->delete();
+
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully!');
     }
+
 }
