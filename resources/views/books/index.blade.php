@@ -1,10 +1,10 @@
 @extends("layout.app")
 @section("content")
 <h1>Livres</h1>
-<a href="#" class="btn btn-primary mb-2">Ajouter un livre</a>
+<a href="{{route('books.create')}}" class="btn btn-primary float-right mb-2">Ajouter un livre</a>
 
 <table class="table">
-    <thead>
+<thead>
         <tr>
             <th scope="col">Titre</th>
             <th scope="col">Pages</th>
@@ -19,7 +19,9 @@
             <td>{{ $book->pages }}</td>
             <td>{{ $book->quantity }}</td>
             <td>
-                --actions--
+                <a href="{{route('books.show', $book->id)}}" class="btn btn-info">Afficher</a>
+                <a href="{{route('books.edit', $book->id)}}" class="btn btn-primary">Editer</a>
+                <a href="{{route('books.destroy', $book->id)}}" class="btn btn-danger">Supprimer</a>
             </td>
         </tr>
         @endforeach

@@ -15,7 +15,7 @@ class BookController extends Controller
     {
         //Return all books
         $books = Book::all();
-        return view('books', [
+        return view('books.index', [
           'books' => $books
         ]);
     }
@@ -25,7 +25,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -41,7 +41,9 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('books.show', [
+          'book' => Book::findOrFail($id)
+        ]);
     }
 
     /**
@@ -49,7 +51,9 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('books.edit', [
+          'book' => Book::findOrFail($id)
+        ]);
     }
 
     /**
@@ -65,6 +69,11 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find the book by ID
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        // Redirect to the index page with a success message
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully');
     }
 }
