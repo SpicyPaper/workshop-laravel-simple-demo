@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 // TODO-1-0 Créer un contrôleur "HomeController" --> php artisan...
+
 // TODO-1-1 Créer la méthode index pour renvoyer "hello world!"
 
 // TODO-4-0 Créer un contrôleur "BookController" capable de traiter la ressource "Book" --> php artisan... --resource
@@ -31,8 +33,13 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    public function index() {
-        $users = User::all();
-        return view('welcome', ['users' => $users]);
+    // public function index() {
+    //     $users = User::all();
+    //     return view('welcome', ['users' => $users]);
+    // }
+    public function index()
+    {
+        $books = Book::all();
+        return view('books', ['books' => $books]);
     }
 }
