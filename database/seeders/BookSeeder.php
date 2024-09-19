@@ -13,7 +13,7 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('books')->insert(
+        DB::table('books')->insert([
             [
                 'title' => "Mon livre",
                 'pages' => 10,
@@ -29,6 +29,6 @@ class BookSeeder extends Seeder
                 'pages' => 1000,
                 'quantity' => 30,
             ]
-        );
+        ]);
     }
 }
