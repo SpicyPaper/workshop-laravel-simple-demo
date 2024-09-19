@@ -4,7 +4,7 @@
 <!-- TODO-2-0 DONE Ajouter le contenu de la nouvelle vue "home" https://codepen.io/spicypaper/pen/wvemNKj et
     ajouter le lien vers la vue "home" dans la navbar -->
 
-<!-- TODO-4-3 Créer une vue blade layout permettant de fournir une base pour les autres vues "views/layout/app.blade.php" -->
+<!-- TODO-4-3 DONE Créer une vue blade layout permettant de fournir une base pour les autres vues "views/layout/app.blade.php" -->
 <!-- TODO-4-4 Utiliser le contenu de la vue "home" pour la vue layout -->
 <!-- TODO-4-5 Adapter légèrement la vue layout en utilisant la directive blade @ yield("content") -->
 <!-- TODO-4-6 Adapter la vue "home" pour utiliser le layout app @ extends("layout.app") et
