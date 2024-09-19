@@ -18,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::resource('books', BookController::class);
 
 // TODO-1-2 DONE Remplacer la route "welcome" par la route "home" affichant le hello world
 
 // TODO-7-1 Créer une route pour "order" en s'inspirant de la route "home"
 
-// TODO-4-2 Ajouter la ressource BookController aux routes
+// TODO-4-2 DONE Ajouter la ressource BookController aux routes
