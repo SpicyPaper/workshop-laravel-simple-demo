@@ -31,6 +31,12 @@ class BookController extends Controller
     {
         Book::create($request->all());
 
+        $request->validate([
+            'title' => 'required|min:5|max:25',
+            'pages' => 'required|integer|gt:1|lt:100',
+            'quantity' => 'required|integer|gte:0|lt:100',
+        ]);
+
         return redirect()->route('books.index')
             ->with('success', 'Book created successfully.');
     }
