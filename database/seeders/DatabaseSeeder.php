@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::truncate();
 
         \App\Models\User::factory(10)->create();
-        // TODO-3-6 Ajouter le seeder "BookSeeder" ici en utilisant "$this->call(...)"
-        $this->call("BookSeeder");
+        // TODO-3-6 DONE Ajouter le seeder "BookSeeder" ici en utilisant "$this->call(...)"
+        $this->call(BookSeeder::class);
     }
 }
