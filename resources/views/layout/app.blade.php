@@ -29,8 +29,12 @@
         </div>
     </nav>
 
-    <!-- Begin page content -->
     <div class="container mt-3">
+        @if (session('success'))
+            <div class="alert alert-info" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
         @yield('content')
     </div>
   

@@ -13,7 +13,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
-        return view('books', ['books' => $books]);
+        return view('books.index', ['books' => $books]);
     }
 
     /**
@@ -21,7 +21,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -29,7 +29,10 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Book::create($request->all());
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book created successfully.');
     }
 
     /**
@@ -37,7 +40,8 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.show', ['book' => $book]);
     }
 
     /**
@@ -45,7 +49,8 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book = Book::where('id', $id)->firstOrFail();
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -53,7 +58,10 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Book::findOrFail($id)->update($request->all());
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book updated successfully');
     }
 
     /**
@@ -61,6 +69,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::find($id);
+        $book->delete();
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book deleted successfully');
     }
 }

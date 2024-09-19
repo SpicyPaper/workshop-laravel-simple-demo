@@ -13,7 +13,7 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Book::truncate();
+        Book::truncate();
 
         $books = [
             ['title' => 'Hunter x Hunter n°1', 'pages' => 110, 'quantity' => 1],
@@ -23,7 +23,7 @@ class BookSeeder extends Seeder
         ];
 
         foreach ($books as $book){
-            \App\Models\Book::create(array(
+            Book::create(array(
                 'title' => $book["title"],
                 'pages' => $book["pages"],
                 'quantity' => $book["quantity"]
