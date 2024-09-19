@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BookSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('books')->insert([
+        DB::table('books')->insert([
             [
                 'title' => 'Livre 1',
                 'pages' => 100,
