@@ -5,8 +5,8 @@
     ajouter le lien vers la vue "home" dans la navbar -->
 
 <!-- TODO-4-3 DONE Créer une vue blade layout permettant de fournir une base pour les autres vues "views/layout/app.blade.php" -->
-<!-- TODO-4-4 Utiliser le contenu de la vue "home" pour la vue layout -->
-<!-- TODO-4-5 Adapter légèrement la vue layout en utilisant la directive blade @ yield("content") -->
+<!-- TODO-4-4 DONE Utiliser le contenu de la vue "home" pour la vue layout -->
+<!-- TODO-4-5 DONE Adapter légèrement la vue layout en utilisant la directive blade @ yield("content") -->
 <!-- TODO-4-6 Adapter la vue "home" pour utiliser le layout app @ extends("layout.app") et
     créer une section @ section("content") + @ endsection -->
 <!-- TODO-4-7 Créer la vue "books.blade.php" pour afficher les books en utilisant le layout app et @ foreach-->
