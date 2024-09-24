@@ -13,7 +13,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('books.index')->with('books', Book::all());
+        return view('books.index')->with('books', Book::paginate(5));
     }
 
     /**
@@ -29,6 +29,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'title' => 'required|min:5|max:25',
+            'pages' => 'required|integer|min:1|max:1000',
+            'quantity' => 'required|integer|min:0|max:100',
+        ]);
+
         Book::create([
             'title' => $request->title,
             'pages' => $request->pages,
