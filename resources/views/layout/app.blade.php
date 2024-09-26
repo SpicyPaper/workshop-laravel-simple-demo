@@ -30,6 +30,13 @@
     </nav>
 
     <!-- Begin page content -->
+    <?php
+    // Response from session
+    if (Session::has('success')) {
+        echo '<div class="alert alert-success" role="alert">' . Session::get('success') . '</div>';
+    }
+
+    ?>
     @yield("content")
 
     <!-- Bootstrap JS -->

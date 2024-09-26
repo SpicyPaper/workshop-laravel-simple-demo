@@ -25,6 +25,7 @@ class BookController extends Controller
      */
     public function create()
     {
+        // Get values from the form
         return view('books.create');
     }
 
@@ -33,7 +34,20 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request
+        $request->validate([
+          'title' => 'required',
+          'pages' => 'required',
+          'quantity' => 'required',
+        ]);
+
+        // Create a new book
+        $book = new Book();
+        $book->title = $request->title;
+        $book->pages = $request->pages;
+        $book->quantity = $request->quantity;
+        $book->save();
+        return redirect()->route('books.index')->with('success', 'Book created successfully');
     }
 
     /**
@@ -51,6 +65,7 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
+        // Find the book by ID
         return view('books.edit', [
           'book' => Book::findOrFail($id)
         ]);
@@ -61,7 +76,21 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the request
+        $request->validate([
+          'title' => 'required',
+          'pages' => 'required',
+          'quantity' => 'required',
+        ]);
+
+        // Find the book by ID
+        $book = Book::findOrFail($id);
+        $book->title = $request->title;
+        $book->pages = $request->pages;
+        $book->quantity = $request->quantity;
+        $book->save();
+
+        return redirect()->route('books.index')->with('success', 'Book updated successfully');
     }
 
     /**

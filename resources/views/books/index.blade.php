@@ -21,7 +21,10 @@
             <td>
                 <a href="{{route('books.show', $book->id)}}" class="btn btn-info">Afficher</a>
                 <a href="{{route('books.edit', $book->id)}}" class="btn btn-primary">Editer</a>
-                <a href="{{route('books.destroy', $book->id)}}" class="btn btn-danger">Supprimer</a>
+                <form action="{{ route('books.destroy', $book->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')<button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
             </td>
         </tr>
         @endforeach
