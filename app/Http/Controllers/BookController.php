@@ -12,8 +12,19 @@ class BookController extends Controller
      */
     public function index()
     {
+        $books = \App\Models\Book::with('author')->paginate(5);
+
         return view('books.index', [
-            'books' => \App\Models\Book::all()
+            'books' => $books
+        ]);
+    }
+
+    public function order()
+    {
+        $books = \App\Models\Book::where('quantity', '<=', 0)->paginate(5);
+
+        return view('order', [
+            'books' => $books
         ]);
     }
 
@@ -22,7 +33,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $authors = \App\Models\Author::all();
+        return view('books.create', compact('authors'));
     }
 
     /**
@@ -33,7 +45,8 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|min:5|max:25',
             'pages' => 'required|integer|min:0|max:1000',
-            'quantity' => 'required|integer|min:0|max:100'
+            'quantity' => 'required|integer|min:0|max:100',
+            'author_id' => 'nullable|integer|exists:authors,id'
         ]);
         \App\Models\Book::create($request->all());
         return redirect()->route('books.index')->with('success','Book created successfully.');
@@ -64,6 +77,11 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'title' => 'required|min:5|max:25',
+            'pages' => 'required|integer|min:0|max:1000',
+            'quantity' => 'required|integer|min:0|max:100'
+        ]);
         \App\Models\Book::find($id)->update($request->all());
         return redirect()->route('books.index')->with('success', 'Book updated successfully');
     }

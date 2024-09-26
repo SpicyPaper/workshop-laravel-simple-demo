@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <a class="btn btn-primary" href="{{ route('books.index') }}">Retour</a>
+        <a class="btn btn-primary" href="{{ route('books.index') }}"><i class="bi bi-arrow-left"></i></a>
     </div>
 </div>
 <form action="{{ route('books.update', $book->id) }}" method="POST">
@@ -28,10 +28,17 @@
                         <label for="inputQuantity">Quantité</label>
                         <input type="text" name="quantity" value="{{$book->quantity}}" class="form-control" id="inputQuantity">
                     </div>
+                    <button type="submit" class="btn btn-primary mt-3"><i class="bi bi-check"></i></button>
                 </div>
-
-                <button type="submit" class="btn btn-primary mt-3">Modifier</button>
             </div>
+            @if($errors)
+                <br>
+                @foreach($errors->all() as $error)
+                    <li class="alert alert-danger">
+                        <i class="bi bi-exclamation-square"></i> {{ $error }}
+                    </li>
+                @endforeach
+            @endif
         </div>
     </div>
 
