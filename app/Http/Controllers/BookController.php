@@ -30,6 +30,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $request->validate([
+            'title' => 'required|min:5|max:25',
+            'pages' => 'required|integer|gt:0|lt:1000',
+            'quantity' => 'required|integer|gte:0|lt:100',
+         ]);
+
         $book = new \App\Models\Book();
         $book->title = $request->title;
         $book->pages = $request->pages;
