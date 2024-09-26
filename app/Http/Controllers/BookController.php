@@ -8,8 +8,15 @@ class BookController extends Controller
 {
     public function index()
     {
-      $books = Book::all();
-      return view('books/index', ['books' => $books]);
+      $books = Book::latest()->paginate(5);
+      return view('books/index', compact('books'))
+      ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function order(){
+      $books = Book::latest()->where('quantity', '<=', 0)->paginate(5);
+      return view('order', compact('books'))
+      ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function create()
@@ -34,7 +41,7 @@ class BookController extends Controller
 
     public function edit($id)
     {
-      $book = Book::find($id);
+      $book = Book::findOrFail($id);
       return view('books/edit', ['book' => $book]);
     }
 
@@ -55,13 +62,13 @@ class BookController extends Controller
 
     public function show($id)
     {
-      $book = Book::find($id);
+      $book = Book::findOrFail($id);
       return view('books/show', ['book' => $book]);
     }
 
     public function destroy($id)
     {
-      $book = Book::find($id);
+      $book = Book::findOrFail($id);
       $book->delete();
       return redirect('/books')->with('success', 'Book has been deleted');
     }
