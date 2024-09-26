@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                      <a class="nav-link" href="books">Books</a>
+                      <a class="nav-link" href="/books">Books</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="TODO to order">Order</a>
@@ -31,6 +31,12 @@
 
     <!-- Begin page content -->
     <div class="container mt-3">
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                {{Session::get('success') }}
+            </div>
+        @endif
+
         @yield("content")
     </div>
 

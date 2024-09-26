@@ -13,8 +13,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
-        return view('books', ['books' => $books]);
-
+        return view('books.index', ['books' => $books]);
     }
 
     /**
@@ -22,7 +21,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -30,7 +29,18 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation des données
+        $validated = $request->validate([
+            'title' => 'required|min:5|max:25',
+            'pages' => 'required|integer|min:1|max:999',
+            'quantity' => 'required|integer|min:0|max:99',
+        ]);
+
+        // Création du livre
+        Book::create($validated);
+
+        // Redirection avec utilisation du nom de la route
+        return redirect()->route('books.index')->with('success', 'Book created successfully !');
     }
 
     /**
@@ -38,7 +48,8 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.show', ['book' => $book]);
     }
 
     /**
@@ -46,7 +57,8 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -54,7 +66,18 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validation des données
+        $validated = $request->validate([
+            'title' => 'required|min:5|max:25',
+            'pages' => 'required|integer|min:1|max:999',
+            'quantity' => 'required|integer|min:0|max:99',
+        ]);
+
+        $book = Book::findOrFail($id);
+        $book->update($validated);
+
+        // Redirection vers la liste des livres avec nom de la route
+        return redirect()->route('books.index')->with('success', 'Book updated successfully !');
     }
 
     /**
@@ -62,6 +85,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        // Redirection vers la liste des livres avec nom de la route
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully !');
     }
 }

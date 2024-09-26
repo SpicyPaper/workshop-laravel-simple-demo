@@ -20,6 +20,13 @@
 <!-- TODO-5-1 Renommer la vue "book" en "index" (attention à adapter le contrôleur) -->
 <!-- TODO-5-2 Créer les vues manquantes afin de compléter le CRUD de "books" (create, edit, index, show) et
     y inscrire quelque chose de temporaire -->
+
+<!-- php artisan make:view books/create -->
+<!-- php artisan make:view books/edit -->
+<!-- php artisan make:view books/index -->
+<!-- php artisan make:view books/show -->
+
+
 <!-- TODO-5-4 Ajouter des boutons d'actions dans la vue "index"
     Ajouter un livre:
     <a href="TODO route Laravel" class="btn btn-primary float-right mb-2">Ajouter un livre</a>
