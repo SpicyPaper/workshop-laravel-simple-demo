@@ -13,6 +13,7 @@
             <th scope="col">Titre</th>
             <th scope="col">Pages</th>
             <th scope="col">Quantité</th>
+            <th scope="col">Auteur</th>
             <th scope="col">&nbsp;</th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
             <td>{{ $book->title }}</td>
             <td>{{ $book->pages }}</td>
             <td>{{ $book->quantity }}</td>
+            <td>{{ $book->author->name?? "Auteur inconnu" }}</td>
             <!--actions-->
             <td>
                 <a class="btn btn-info" href="{{ route('books.show',$book->id) }}">Afficher</a>
@@ -36,4 +38,5 @@
         @endforeach
     </tbody>
 </table>
+{!! $books->links() !!}
 @endsection
