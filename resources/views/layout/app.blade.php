@@ -29,6 +29,22 @@
         </div>
     </nav>
 
+    @if (Session::has('message'))
+    <div class="container">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ Session::get('message') }}
+        </div>
+    </div>
+    <script>
+        setTimeout(function() {
+            var alertElement = document.querySelector('.alert');
+            if (alertElement) {
+                var alert = new bootstrap.Alert(alertElement);
+                alert.close();
+            }
+        }, 3000);
+    </script>
+    @endif
     @yield("content")
 
     <!-- Bootstrap JS -->
