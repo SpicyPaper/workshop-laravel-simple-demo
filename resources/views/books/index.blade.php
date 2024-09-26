@@ -14,6 +14,7 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Pages</th>
                 <th scope="col">Quantité</th>
+                <th scope="col">Auteur</th>
                 <th scope="col">&nbsp;</th>
             </tr>
         </thead>
@@ -23,6 +24,13 @@
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->pages }}</td>
                     <td>{{ $book->quantity }}</td>
+                    <td>
+                        @if (is_null($book->author))
+                            Pas d'auteur
+                        @else
+                            {{ $book->author->name }}
+                        @endif
+                    </td>
                     <td>
                         <a class="btn btn-info" href="/books/{{ $book->id }}">Afficher</a>
                         <a class="btn btn-primary" href="/books/{{ $book->id }}/edit">Modifier</a>

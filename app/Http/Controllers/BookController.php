@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('books.index')->with('books', Book::paginate(5));
+        return view('books.index')->with('books', Book::with('author')->latest()->paginate(5));
     }
 
     /**
@@ -21,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        return view('books.create')->with('authors', Author::all());
     }
 
     /**
@@ -33,12 +34,14 @@ class BookController extends Controller
             'title' => 'required|min:5|max:25',
             'pages' => 'required|integer|min:1|max:1000',
             'quantity' => 'required|integer|min:0|max:100',
+            'author_id' => 'nullable|integer|exists:authors,id',
         ]);
 
         Book::create([
             'title' => $request->title,
             'pages' => $request->pages,
             'quantity' => $request->quantity,
+            'author_id' => $request->author_id,
         ]);
 
         return redirect('/books')->with('message', "Book created");

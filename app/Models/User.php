@@ -17,9 +17,12 @@ use Laravel\Sanctum\HasApiTokens;
 // php artisan migrate
 
 // TODO-8-0 Créer un modèle "Author" et sa migration en une seule commande --> php artisan... --migration
+//  -> php artisan make:model Author --migration
 // TODO-8-1 Ajouter un champ "name" à "Author" et migrer les changements --> php artisan...
+//  -> php artisan migrate
 // TODO-8-2 Relier "Book" et "Author" à l'aide d'une clée étrangère nommée "author_id" dans la table "Book"
 //      1. Créer une migration nommée "add_author_fk_to_books" --> php artisan...
+//  ->php artisan make:migration add_author_fk_to_books
 //      2. Relier la clée étrangère de la table "Book" (author_id) avec la clée primaire de "Author" (id) --> foreignId + constrained
 //      3. Permettre à la clée étrangère d'être null --> nullable
 //      4. Ajouter la suppression en cascade, supprimant les livres rattachés à un auteur quand celui-ci est supprimé --> onDelete
