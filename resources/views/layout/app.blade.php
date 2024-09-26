@@ -26,7 +26,7 @@
                         <a class="nav-link" href="/books">Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="TODO to order">Order</a>
+                        <a class="nav-link" href="/order">Order</a>
                     </li>
                 </ul>
             </div>

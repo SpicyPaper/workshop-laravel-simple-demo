@@ -85,4 +85,12 @@ class BookController extends Controller
 
         return redirect('/books')->with('message', "Book deleted");
     }
+
+    /**
+     * Display the books that need to be ordered
+     */
+    public function order()
+    {
+        return view('order')->with('books', Book::where('quantity', '<=', 0)->paginate(5));
+    }
 }

@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // TODO-7-1 Créer une route pour "order" en s'inspirant de la route "home"
+Route::get('/order', [BookController::class, 'order'])->name('order');
 
 // TODO-4-2 Ajouter la ressource BookController aux routes
 Route::resource('books', BookController::class);
