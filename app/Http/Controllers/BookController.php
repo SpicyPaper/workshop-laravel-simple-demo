@@ -25,6 +25,22 @@ class BookController extends Controller
         ]);
     }
 
+    //Créer une méthode "order" dans le contrôleur "BookController" basé sur la méthode "index" qui
+    //      renvoie uniquement les livres ayant une quantité <= à 0
+    /**
+     * Display a listing of the commands.
+     */
+    public function order()
+    {
+        // TODO-7-4 Afficher un message spécial si aucun livre ne doit être commandé -->
+        $books = Book::where('quantity', '<=', 0)->paginate(5);
+
+        return view('order', [
+          'books' => $books
+        ]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -116,4 +132,6 @@ class BookController extends Controller
         // Redirect to the index page with a success message
         return redirect()->route('books.index')->with('success', 'Book deleted successfully');
     }
+
+
 }
