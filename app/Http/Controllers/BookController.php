@@ -13,8 +13,13 @@ class BookController extends Controller
      */
     public function index()
     {
+        // "BookController.index" pour renvoyer 5 éléments uniquements et un numéro de page (pagination)
         //Return all books
         $books = Book::all();
+
+        //Return 5 books per page
+        $books = Book::paginate(5);
+
         return view('books.index', [
           'books' => $books
         ]);
@@ -35,19 +40,25 @@ class BookController extends Controller
     public function store(Request $request)
     {
         // Validate the request
-        $request->validate([
-          'title' => 'required',
-          'pages' => 'required',
-          'quantity' => 'required',
+        $validatedData = $request->validate([
+          'title' => 'required|string|min:5|max:25',
+          'pages' => 'required|integer|between:1,999',
+          'quantity' => 'required|integer|between:0,99',
         ]);
 
-        // Create a new book
-        $book = new Book();
-        $book->title = $request->title;
-        $book->pages = $request->pages;
-        $book->quantity = $request->quantity;
-        $book->save();
-        return redirect()->route('books.index')->with('success', 'Book created successfully');
+        // If validation fails, it will automatically redirect back with errors
+        // If validation passes, continue with the rest of the code
+        if(!$validatedData) {
+            return redirect()->back()->withErrors($validatedData);
+        }else{
+            // Create a new book
+            $book = new Book();
+            $book->title = $request->title;
+            $book->pages = $request->pages;
+            $book->quantity = $request->quantity;
+            $book->save();
+            return redirect()->route('books.index')->with('success', 'Book created successfully');
+        }
     }
 
     /**
