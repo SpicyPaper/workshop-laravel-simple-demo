@@ -40,6 +40,6 @@ class WelcomeController extends Controller
     public function index()
     {
         $books = Book::all();
-        return view('books', ['books' => $books]);
+        return view('books.index', ['books' => $books]);
     }
 }
