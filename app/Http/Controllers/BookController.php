@@ -12,18 +12,24 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
-        return view('/books/index', ['books' => $books]);
+        $books = Book::paginate(5);
+        return view('books.index', compact('books'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function store(Request $request)
-    {      
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|min:5|max:25',
+            'pages' => 'required|integer|min:0|max:1000',
+            'quantity' => 'required|integer|min:0|max:99',
+        ]);
+    
         $book = new Book();
-        $book->title = $request->input('title');
-        $book->pages = $request->input('pages');
-        $book->quantity = $request->input('quantity');
-
+        $book->title = $validated['title'];
+        $book->pages = $validated['pages'];
+        $book->quantity = $validated['quantity'];
         $book->save();
-
+    
         return redirect('/books')->with('success', 'Book created successfully');
     }
 

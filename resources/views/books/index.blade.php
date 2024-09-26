@@ -31,4 +31,6 @@
         @endforeach
     </tbody>
 </table>
+
+{!! $books->links() !!}
 @endsection
