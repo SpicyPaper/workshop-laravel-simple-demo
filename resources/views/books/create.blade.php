@@ -22,15 +22,36 @@
                         <div class="form-group col-12">
                             <label for="inputTitle">Titre</label>
                             <input type="text" name="title" class="form-control" id="inputTitle">
+
+                            @if ($errors->has('title'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('title') }} <!-- Affiche le premier message d'erreur pour le champ 'title' -->
+                            </div>
+                            @endif
+
                         </div>
                         <div class="row mt-3">
                             <div class="form-group col-6">
                                 <label for="inputPages">Nombre de pages</label>
                                 <input type="text" name="pages" class="form-control" id="inputPages">
+
+                                @if ($errors->has('pages'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('pages') }} <!-- Affiche le premier message d'erreur pour le champ 'pages' -->
+                                </div>
+                                @endif
+
                             </div>
                             <div class="form-group col-6">
                                 <label for="inputQuantity">Quantité</label>
                                 <input type="text" name="quantity" class="form-control" id="inputQuantity">
+
+                                @if ($errors->has('quantity'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('quantity') }} <!-- Affiche le premier message d'erreur pour le champ 'quantity' -->
+                                </div>
+                                @endif
+
                             </div>
                         </div>
 
@@ -41,4 +62,15 @@
         </div>
     </div>
 </form>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @endsection

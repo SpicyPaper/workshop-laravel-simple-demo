@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Pagination\Paginator;
 
 class BookController extends Controller
 {
@@ -12,8 +13,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
-        return view('books.index', ['books' => $books]);
+        //return view('books.index', ['books' => $books]);
+        //$books = Book::paginate(5); // Paginate by 5 items per page
+        //return view('books.index', compact('books'));
+        $books = Book::latest()->paginate(5);
+        return view('books.index', compact('books'));
     }
 
     /**
