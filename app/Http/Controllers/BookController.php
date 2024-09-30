@@ -92,4 +92,11 @@ class BookController extends Controller
 
         return redirect()->route("books.index")->with("message", "Le livre a été supprimé");
     }
+
+    public function order()
+    {
+        $books = Book::where('quantity', '<=', 0)->paginate(5);
+
+        return view('books.order', ['books' => $books]);
+    }
 }
