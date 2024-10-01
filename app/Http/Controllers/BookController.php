@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(5);
+        $books = Book::with('author')->paginate(5);
         return view("books.index", [
             'books' => $books
         ]);
@@ -24,7 +25,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view("books.create");
+        $authors = Author::all();
+        return view("books.create", ['authors' => $authors]);
     }
 
     /**
@@ -35,12 +37,14 @@ class BookController extends Controller
         $validated = $request->validate([
             'title' => 'required|min:5|max:25',
             'pages' => 'required|integer|min:1|max:1000',
-            'quantity' => 'required|integer|min:0|max:99'
+            'quantity' => 'required|integer|min:0|max:99',
+            'author_id' => 'nullable|integer|exists:authors,id'
         ]);
         $book = new Book([
             'title' => $validated["title"],
             'pages' => $validated["pages"],
-            'quantity' => $validated["quantity"]
+            'quantity' => $validated["quantity"],
+            'author_id' => $validated["author_id"]
         ]);
         $book->save();
 

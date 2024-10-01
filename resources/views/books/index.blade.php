@@ -10,6 +10,7 @@
             <th scope="col">Titre</th>
             <th scope="col">Pages</th>
             <th scope="col">Quantité</th>
+            <th scope="col">Auteur</th>
             <th scope="col">&nbsp;</th>
         </tr>
     </thead>
@@ -17,9 +18,9 @@
         @foreach ($books as $book)
         <tr>
             <td>{{ $book->title }}</td>
-            <td>pages : {{ $book->pages }}</td>
-            <td>quantité : {{ $book->quantity }}</td>
-            <td>auteur: {{ $book->author_id ?? "Pas d'auteur" }}</td>
+            <td>{{ $book->pages }}</td>
+            <td>{{ $book->quantity }}</td>
+            <td>{{ $book->author->name ?? "Pas d'auteur" }}</td>
             <td>
                 <a class="btn btn-info" href={{ route("books.show", $book->id) }}>Afficher</a>
                 <a class="btn btn-primary" href={{ route("books.edit", $book->id) }}>Editer</a>

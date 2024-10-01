@@ -20,16 +20,25 @@
                     <div class="form-row">
                         <div class="form-group col-12">
                             <label for="inputTitle">Titre</label>
-                            <input type="text" name="title" class="form-control" id="inputTitle">
+                            <input type="text" name="title" value="{{old('title')}}" class="form-control" id="inputTitle">
                         </div>
                         <div class="row mt-3">
                             <div class="form-group col-6">
                                 <label for="inputPages">Nombre de pages</label>
-                                <input type="text" name="pages" class="form-control" id="inputPages">
+                                <input type="text" name="pages" value="{{old('pages')}}" class="form-control" id="inputPages">
                             </div>
                             <div class="form-group col-6">
                                 <label for="inputQuantity">Quantité</label>
-                                <input type="text" name="quantity" class="form-control" id="inputQuantity">
+                                <input type="text" name="quantity" value="{{old('quantity')}}" class="form-control" id="inputQuantity">
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="selectAuthor">Auteur</label>
+                                <select class="form-control" name="author_id" id="selectAuthor">
+                                    <option value="">Pas d'auteur</option>
+                                    @foreach ($authors as $author)
+                                    <option {{(old("author_id") == $author->id ? "selected":"")}} value="{{$author->id}}">{{$author->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
