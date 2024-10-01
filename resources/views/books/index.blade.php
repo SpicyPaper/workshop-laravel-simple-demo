@@ -2,7 +2,7 @@
 @section("content")
 <h1>Livres</h1>
 
-<a href={{ route("books.create") }} class="btn btn-primary mb-2">Ajouter un livre</a>
+<a href={{ route("books.create") }} class="btn btn-primary mb-2">Ajouter un livre <i class="bi bi-plus-circle-fill"></i></a>
 
 <table class="table">
     <thead>
@@ -22,12 +22,12 @@
             <td>{{ $book->quantity }}</td>
             <td>{{ $book->author->name ?? "Pas d'auteur" }}</td>
             <td>
-                <a class="btn btn-info" href={{ route("books.show", $book->id) }}>Afficher</a>
-                <a class="btn btn-primary" href={{ route("books.edit", $book->id) }}>Editer</a>
                 <form action={{ route("books.destroy", $book->id) }} method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                    <a class="btn btn-info" href={{ route("books.show", $book->id) }}><i class="bi bi-box-arrow-up-right"></i></a>
+                    <a class="btn btn-primary" href={{ route("books.edit", $book->id) }}><i class="bi bi-pencil-square"></i></a>
+                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                 </form>
             </td>
         </tr>
