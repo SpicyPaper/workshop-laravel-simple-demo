@@ -25,12 +25,12 @@
                 <td>{{ $book->pages }}</td>
                 <td>{{ $book->quantity }}</td>
                 <td>
-                    <a class="btn btn-info" href="/books/{{ $book->id }}">Afficher</a>
-                    <a class="btn btn-primary" href="/books/{{ $book->id }}/edit">Modifier</a>
+                    <a class="btn btn-info" href="/books/{{ $book->id }}"><i class="bi-eye"></i>&nbsp;Afficher</a>
+                    <a class="btn btn-primary" href="/books/{{ $book->id }}/edit"><i class="bi-pencil-square"></i>&nbsp;Modifier</a>
                     <form action="/books/{{ $book->id }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger"><i class="bi-trash"></i>&nbsp;Supprimer</button>
                     </form>
                 </td>
             </tr>

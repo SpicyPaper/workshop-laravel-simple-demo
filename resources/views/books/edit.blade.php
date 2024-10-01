@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <a class="btn btn-primary" href="/books"> Retour</a>
+            <a class="btn btn-primary" href="/books"><i class="bi-chevron-left"></i>&nbsp;Retour</a>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Modifier</button>
+                    <button type="submit" class="btn btn-primary mt-3"><i class="bi-check-lg"></i>&nbsp;Modifier</button>
                 </div>
             </div>
         </div>
