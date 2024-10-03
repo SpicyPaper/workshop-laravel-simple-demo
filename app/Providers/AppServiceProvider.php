@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // TODO-6-5 Adapter les liens de pagination pour fonctionner avec Bootstrap
+        \Illuminate\Pagination\Paginator::useBootstrap();
     }
 }
