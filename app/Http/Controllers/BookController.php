@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Author;
 use Illuminate\Pagination\Paginator;
 
 class BookController extends Controller
@@ -13,11 +14,14 @@ class BookController extends Controller
      */
     public function index()
     {
-        //return view('books.index', ['books' => $books]);
-        //$books = Book::paginate(5); // Paginate by 5 items per page
-        //return view('books.index', compact('books'));
-        $books = Book::latest()->paginate(5);
+        $books = Book::with('author')->latest()->paginate(5);
         return view('books.index', compact('books'));
+    }
+    public function order()
+    {
+        $books = Book::where('quantity', '<=', 10)->paginate(5);
+
+        return view('order', compact('books'));
     }
 
     /**
@@ -25,7 +29,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $authors = Author::all(); // Récupérer tous les auteurs
+        return view('books.create', compact('authors'));
     }
 
     /**
@@ -38,6 +43,7 @@ class BookController extends Controller
             'title' => 'required|min:5|max:25',
             'pages' => 'required|integer|min:1|max:999',
             'quantity' => 'required|integer|min:0|max:99',
+            'author_id' => 'nullable|integer|exists:authors,id',
         ]);
 
         // Création du livre

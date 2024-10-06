@@ -69,6 +69,8 @@
 <!-- TODO-7-0 Créer une vue "order.blade.php" permettant de lister les livres à commandés
     - Repartir de la vue "index" (garder la pagination)
     - Afficher tous les livres reçu sur cette page (la logique de filtre sera faites dans le contrôleur)
+
+    php artisan make:view order
 -->
 <!-- TODO-7-3 Ajouter le lien à la vue order dans "layout.app" -->
 <!-- TODO-7-4 Afficher un message spécial si aucun livre ne doit être commandé -->

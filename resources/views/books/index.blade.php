@@ -11,6 +11,8 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Pages</th>
                 <th scope="col">Quantité</th>
+                <th scope="col">ID auteur</th>
+                <th scope="col">Nom de l'auteur</th>
                 <th scope="col">&nbsp;</th>
             </tr>
         </thead>
@@ -20,9 +22,22 @@
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->pages }}</td>
                     <td>{{ $book->quantity }}</td>
+                    <td>
+                        {{$book->author_id ?? "Auteur inconnu..."}}
+                    </td>
+                    <td>
+                        {{$book->author->name ?? "Nom d'auteur inconnu..."}}
+                    </td>
+                    <td><a class="btn btn-info" href="{{ route('books.show', $book->id) }}">
+                        <i class="bi bi-eye"></i>
+                    </td>
 
-                    <td><a class="btn btn-info" href="{{ route('books.show', $book->id) }}">Afficher</a></td>
-                    <td><a class="btn btn-primary" href="{{ route('books.edit', $book->id) }}">Modifier</a></td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ route('books.edit', $book->id) }}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </td>
+
                     <td>
                         <form action="{{ route('books.destroy', $book->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
                             @csrf
