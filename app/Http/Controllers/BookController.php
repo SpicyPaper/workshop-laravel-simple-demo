@@ -8,7 +8,7 @@ class BookController extends Controller
 {
     public function index()
     {
-      $books = Book::latest()->paginate(5);
+      $books = Book::with('author')->latest()->paginate(5);
       return view('books/index', compact('books'))
       ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -21,14 +21,16 @@ class BookController extends Controller
 
     public function create()
     {
-      return view('books/create');
+      $authors = \App\Models\Author::all();
+      return view('books/create', compact('authors'));
     }
 
     public function store(){
       request()->validate([
-        'title' => ['required', 'min:1', 'max:50'],
-        'pages' => ['required', 'integer', 'min:10', 'max:2000'],
-        'quantity' => ['required', 'integer', 'min:1', 'max:500']
+        'title' => 'required|min:1|max:50',
+        'pages' => 'required|integer|min:10|max:2000',
+        'quantity' => 'required|integer|min:1|max:500',
+        'author_id' => 'nullable|integer|exists:authors,id'
       ]);
 
       $book = new Book();

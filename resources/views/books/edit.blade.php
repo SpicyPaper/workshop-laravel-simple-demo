@@ -4,7 +4,7 @@
 
 <div class="row mb-3">
     <div class="col-12">
-        <a class="btn btn-primary" href="/books">Back</a>
+        <a class="btn btn-primary" href="/books"><i class="bi bi-arrow-left"></i></a>
     </div>
 </div>
 
